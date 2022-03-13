@@ -81,10 +81,12 @@ public class DrawingApp
 //    	Circle c1 = factory.getBean("circle1", Circle.class);
 //    	c1.draw();
     	
+    	//c2 is defined in xml and c3 is defined in component scan. both exist within the container
     	Circle c2 = factory2.getBean("circle2", Circle.class);
     	c2.draw();
     	
-    	System.out.println("-----------");
-    	practice.dotask();
+    	//we dont have any xml config written for circle 3 and its dependency point3. all are auto configured with help of annotations.
+    	Circle c3 = factory2.getBean("circle3", Circle.class);
+    	c3.draw();
     }
 }

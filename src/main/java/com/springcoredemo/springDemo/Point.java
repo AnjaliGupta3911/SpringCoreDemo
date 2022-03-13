@@ -1,7 +1,13 @@
 package com.springcoredemo.springDemo;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component("point3")
 public class Point {
+	@Value("33")
 	private int x;
+	@Value("44")
 	private int y;
 	
 	public int getX() {

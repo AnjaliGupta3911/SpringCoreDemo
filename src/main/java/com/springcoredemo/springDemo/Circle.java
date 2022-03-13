@@ -3,14 +3,15 @@ package com.springcoredemo.springDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
 
+@Component("circle3")
 public class Circle {
-	
 	
 	Point center;
 	
 	@Autowired
-	Circle(@Qualifier("point2") Point p){
+	Circle(@Qualifier("point3") Point p){
 		center = p;
 	}
 	
