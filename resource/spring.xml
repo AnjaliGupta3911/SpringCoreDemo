@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<!-- bean definitions here -->
+
+<beans>
+		<!-- when triangle doesnt have any member variable, we can simply use this -->	
+		<!-- <bean id="triangle" class="com.springcoredemo.springDemo.Triangle" /> -->
+		
+	<alias name="triangle" alias="triangle1"/>
+	
+	<bean id="triangle" class="com.springcoredemo.springDemo.Triangle">
+		<property name="type" value="isoceles" />
+	</bean>
+	
+	<bean id="triangle2" class="com.springcoredemo.springDemo.Triangle">
+		<constructor-arg value="equilateral" />
+	</bean>
+	
+	<bean id="triangle3" class="com.springcoredemo.springDemo.Triangle">
+		<constructor-arg value="scalene" />
+		<constructor-arg value="20" />
+	</bean>
+	
+	<bean id="triangle4" class="com.springcoredemo.springDemo.Triangle">
+		<constructor-arg type="String" value="tri" />
+	</bean>
+	
+	<bean id="triangle5" class="com.springcoredemo.springDemo.Triangle">
+		<constructor-arg index="1" value="20" />
+		<constructor-arg index="0" value="isoceles" />
+	</bean>
+	
+	<bean id="tri2" class="com.springcoredemo.springDemo.Triangle2" name="triangle2.2">
+		<constructor-arg index="1" ref="point1" />
+		<constructor-arg index="0" ref="point2" />
+	</bean>
+	
+	<bean id="tri3" class="com.springcoredemo.springDemo.Triangle2">
+		<property name="a" ref="point1" />
+		<property name="b" ref="point2" />
+	</bean>
+	
+	<bean id="tri4" class="com.springcoredemo.springDemo.Triangle2">
+		<property name="a">
+			<bean class="com.springcoredemo.springDemo.Point">
+				<property name="x" value="1"/>
+				<property name="y" value="1"/>
+			</bean>
+		</property>
+		<property name="b">
+			<bean class="com.springcoredemo.springDemo.Point">
+				<property name="x" value="3"/>
+				<property name="y" value="6"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="tri5" class="com.springcoredemo.springDemo.Triangle2" autowire="byName" />
+	
+	<!-- this wont work as there are 4 candidates of type point available for autowiring byType and constructor
+	<bean id="tridemo" class="com.springcoredemo.springDemo.Triangle2" autowire="byType" /> 	
+	 -->
+	 
+	<!-- from spring 3 onwards we can declare a bean as primary.  Doing so will tell spring to consider this bean when autowiring using byType 
+		
+	<bean id="pointDemo" class="com.springcoredemo.springDemo.Point" primary="true">
+		<property name="x" value="10"/>
+		<property name="y" value="5"/>
+	</bean>
+	 --> 
+	
+	<bean id="point1" class="com.springcoredemo.springDemo.Point">
+		<property name="x" value="10"/>
+		<property name="y" value="5"/>
+	</bean>
+	
+	<bean id="point2" class="com.springcoredemo.springDemo.Point">
+		<constructor-arg  index="1" value="6"/>
+		<constructor-arg  value="18"/>
+	</bean>
+	
+	<bean id="a" class="com.springcoredemo.springDemo.Point">
+		<property name="x" value="4"/>
+		<property name="y" value="5"/>
+	</bean>
+	
+	<bean id="b" class="com.springcoredemo.springDemo.Point">
+		<constructor-arg  index="1" value="5"/>
+		<constructor-arg  value="4"/>
+	</bean>
+	
+	<!-- this will also not work even though square has 4 point variables, and only 4 are defined 
+		<bean id="square1" class="com.springcoredemo.springDemo.Square" autowire="byType" /> 	
+	-->
+	
+	<bean id="line1" class="com.springcoredemo.springDemo.Line">
+		<property name="points">
+			<list>
+				<ref bean="point1"/>
+				<ref bean="point2"/>
+			</list>
+		</property>
+	</bean>
+	
+
+	
+	<!-- bean post processor for required annotation-->
+	<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+	
+	
+</beans>
